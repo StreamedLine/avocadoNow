@@ -9,14 +9,23 @@ class PlacesController < ApplicationController
 		place = Place.create(params[:place])
 
 		flash[:message] = "Avocado now! Success!"
-		erb :"places/#{place.id}"
+		redirect "places/#{place.id}"
 	end
 
 	get '/places/:id' do 
 		protect_data
+
 		@place = Place.find(params[:id])
+		@editable = is_current_user?(@place.user_id) ? true : nil 
 		erb :'places/show'
 	end
+
+	get '/places/:id/edit' do
+		protect_data
+
+		@place = Place.find(params[:id])
+		erb :'places/edit'
+	end 
 
 	patch '/places/:id' do 
 		protect_data
@@ -24,10 +33,10 @@ class PlacesController < ApplicationController
 		if is_current_user?(Place.find(params[:id]).user_id)
 			place = Place.update(params[:id], params[:place])
 			flash[:message] = "Update successful."
-			erb :"places/#{place.id}"
+			redirect "places/#{place.id}"
 		else
 			flash[:error] = "You can only update your own post."
-			erb :"places/#{place.id}"
+			redirect "places/#{place.id}"
 		end
 	end
 
