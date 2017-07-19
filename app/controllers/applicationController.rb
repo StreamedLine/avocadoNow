@@ -16,6 +16,10 @@ class ApplicationController < Sinatra::Base
 			redirect '/users/login' unless logged_in?
 		end
 
+		def is_current_user?(user_id)
+			user_id == current_user.id
+		end
+
 		def logged_in?
 			!!current_user
 		end
