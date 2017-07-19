@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/main.css">
+	<title>Place Finder</title>
+</head>
+<body>
+
+<nav>
+	<a href="/">Home</a>
+	<a href="/places/index">Places</a>
+</nav>
+
+<div class="flashMessages">
+	<%if flash.include?(:error) %>
+	  <h3 class="flash error"><%= flash[:error] %></h3>
+	<% end %>
+	<% if flash.include?(:message) %>
+	  <h3 class="message"><%= flash[:message] %></h3>
+	<% end %>
+</div>
+
+<%=yield%>
+
+</body>
+</html>

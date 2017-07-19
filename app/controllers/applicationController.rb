@@ -1,0 +1,27 @@
+class ApplicationController < Sinatra::Base
+	register Sinatra::Flash
+	configure do 	
+		set :public_folder, 'public'
+		enable :sessions
+		set :views, 'app/views'
+		set :session_secret, "password_security"
+	end
+
+	get '/' do 
+		erb :index
+	end
+
+	helpers do
+		def protect_data
+			redirect '/users/login' unless logged_in? && current_user.validated
+		end
+
+		def logged_in?
+			!!current_user
+		end
+
+		def current_user
+			@current_user ||= [nil, ""].include?(session[:user_id]) ? nil : User.find(session[:user_id])
+		end
+	end
+end
