@@ -13,7 +13,7 @@ class ApplicationController < Sinatra::Base
 
 	helpers do
 		def protect_data
-			redirect '/users/login' unless logged_in? && current_user.validated
+			redirect '/users/login' unless logged_in?
 		end
 
 		def logged_in?
