@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	##########
 	#  SIGNUP
 	get '/users/signup' do 
-		erb :'users/create'
+		erb :'users/signup'
 	end
 
 	post '/users/signup' do 
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
 	        User.create(name: params[:name], password: params[:password]) 
 	    end
-		erb :index
+		erb :'users/login'
 	end
 
 	##########
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     	if @user && @user.authenticate(params[:password])
 	   	   session[:user_id] = @user.id
 	   	   flash[:message] = "successfully logged in"
-	   	   redirect to "/places/index"
+	   	   redirect to "/"
 	   	 else
 	   	   flash[:error] = "Login failed"
 	   	   redirect to "/users/login"
