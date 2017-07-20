@@ -11,6 +11,7 @@
 		<a href="/places/<%=place.id%>/expired" title="click here if you could not find any ripe avocados in this location (or if you bought the last ones..)">Report Expiration</a>
 		<h3><%=place.name%></h3>
 		<h4><%=place.address%></h4>
+		<h4><em><%=place.thumbs.count > 0 ? "+#{place.thumbs.count}" : 'Unconfirmed Sighting.'%></em></h4>
 		<h4><%=place.updated_at%></h4>
 		<a href="/places/<%=place.id%>/thumbs/new">Confirm sighting</a>
 	</div>
