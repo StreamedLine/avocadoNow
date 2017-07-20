@@ -60,7 +60,11 @@ class PlacesController < ApplicationController
 	end
 
 	get '/places/:id/expired' do 
+		protect_data
+
 		Place.update(params[:id], {expired: true})
 		redirect '/places'
 	end
+
+	
 end
