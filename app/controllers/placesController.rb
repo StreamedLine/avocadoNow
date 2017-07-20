@@ -58,4 +58,9 @@ class PlacesController < ApplicationController
 			redirect "/places/#{params[:id]}"
 		end
 	end
+
+	get '/places/:id/expired' do 
+		Place.update(params[:id], {expired: true})
+		redirect '/places'
+	end
 end

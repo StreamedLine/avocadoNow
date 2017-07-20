@@ -7,7 +7,8 @@
 <h2>Most Recent Avo Sightings!</h2>
 
 <%@places.each do |place|%>
-	<div class="place">
+	<div class="place <%= place.expired ? 'expired' : ''%>">
+		<a href="/places/<%=place.id%>/expired" title="click here if you could not find any ripe avocados in this location (or if you bought the last ones..)">Report Expiration</a>
 		<h3><%=place.name%></h3>
 		<h4><%=place.address%></h4>
 		<h4><%=place.created_at%></h4>
