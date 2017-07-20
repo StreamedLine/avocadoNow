@@ -8,4 +8,5 @@ use Rack::MethodOverride
 
 use UsersController
 use PlacesController
+use ThumbsController
 run ApplicationController
