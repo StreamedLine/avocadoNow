@@ -7,11 +7,6 @@ class ApplicationController < Sinatra::Base
 		set :session_secret, "password_security"
 	end
 
-	get '/' do 
-		@places = Place.getRecent
-		erb :index
-	end
-
 	helpers do
 		def protect_data
 			redirect '/users/login' unless logged_in?

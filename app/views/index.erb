@@ -1,6 +1,11 @@
 <h1>Avocado Now!</h1>
+<h2>Profile</h2>
 
-<%@places.each do |place|%>
+<h3>I've Confirmed <%=@user.thumbs.count%> places</h3>
+
+<hr>
+<h3>Places I've Added</h3>
+<%@user.places.each do |place|%>
 	<hr>
 	<%=place.name%> <br>
 	<%=place.address%> <br>
@@ -8,3 +13,4 @@
 	%> <br>
 	<hr>
 <%end%>
+<hr>

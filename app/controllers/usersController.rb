@@ -47,4 +47,13 @@ class UsersController < ApplicationController
 		flash[:message] = "successfully logged out"
 		redirect '/users/login'
 	end
+
+	##########
+	#  PROFILE
+	get '/' do
+		redirect '/places' unless logged_in?  
+
+		@user = current_user
+		erb :index
+	end
 end
