@@ -1,1 +1,10 @@
 <h1>Avocado Now!</h1>
+
+<%@places.each do |place|%>
+	<hr>
+	<%=place.name%> <br>
+	<%=place.address%> <br>
+	<%=place.created_at.strftime("Avocados spotted at: %H:%M  %m/%d ")
+	%> <br>
+	<hr>
+<%end%>

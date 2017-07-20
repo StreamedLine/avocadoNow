@@ -8,6 +8,7 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/' do 
+		@places = Place.getRecent
 		erb :index
 	end
 
