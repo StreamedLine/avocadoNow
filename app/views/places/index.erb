@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/css/places.css">
+
+<h1>Avocado Now</h1>
+
+<a href="/places/new">Report Fresh Avocados</a>
+
+<h2>Most Recent Avo Sightings!</h2>
+
+<%@places.each do |place|%>
+	<div class="place">
+		<h3><%=place.name%></h3>
+		<h4><%=place.address%></h4>
+		<h4><%=place.created_at%></h4>
+		<a href="/places/<%=place.id%>/thumbs/new">Confirm sighting</a>
+	</div>
+<%end%>
