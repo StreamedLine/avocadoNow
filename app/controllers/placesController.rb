@@ -9,10 +9,10 @@ class PlacesController < ApplicationController
 	end
 
 	post '/places' do 
-		place = Place.create(params[:place])
+		current_user.places.create(params[:place])
 
 		flash[:message] = "Avocado now! Success!"
-		redirect "places/#{place.id}"
+		redirect "places/#{current_user.places.last.id}"
 	end
 
 	get '/places/:id' do 
