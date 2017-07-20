@@ -9,3 +9,11 @@
 	border-color: red;
 	background-color: grey
 }
+
+.expired em {
+	color: #eee;
+}
+
+em {
+	color: orange
+}
