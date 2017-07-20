@@ -1,7 +1,9 @@
 <h1>Avocado Details</h1>
 
+<a href="/places/<%=place.id%>/expired" title="click here if you could not find any ripe avocados in this location (or if you bought the last ones..)">Report Expiration</a>
+
 <h3>Created at:</h3>
-<h4><%=@place.created_at%></h4>
+<h4><%=@place.updated_at%></h4>
 
 <hr>
 
@@ -13,6 +15,7 @@
 <h3>Address:</h3>
 <h4><%=@place.address%></h4>
 
+<a href="/places/<%=place.id%>/thumbs/new">Confirm sighting</a>
 
 <%if @editable%>
 	<a href="/places/<%=@place.id%>/edit">Edit</a>

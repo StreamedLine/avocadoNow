@@ -1,17 +1,14 @@
 class PlacesController < ApplicationController
 	get '/places' do 
-		protect_data
 		@places = Place.getRecent
 		erb :'/places/index'
 	end
 
 	get '/places/new' do 
-		protect_data
 		erb :'places/new'
 	end
 
 	post '/places' do 
-		protect_data
 		place = Place.create(params[:place])
 
 		flash[:message] = "Avocado now! Success!"
@@ -19,8 +16,6 @@ class PlacesController < ApplicationController
 	end
 
 	get '/places/:id' do 
-		protect_data
-
 		@place = Place.find(params[:id])
 		@editable = is_current_user?(@place.user_id) ? true : nil 
 		erb :'places/show'
@@ -60,11 +55,15 @@ class PlacesController < ApplicationController
 	end
 
 	get '/places/:id/expired' do 
-		protect_data
-
 		Place.update(params[:id], {expired: true})
 		redirect '/places'
 	end
 
+	get '/places/:id/thumbs/new' do 
+		protect_data
+
+		Place.update(params[:id], {expired: false})
+		redirect '/places'
+	end
 	
 end
