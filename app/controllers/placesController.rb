@@ -1,4 +1,10 @@
 class PlacesController < ApplicationController
+	get '/places' do 
+		protect_data
+		@places = Place.getRecent
+		erb :'/places/index'
+	end
+
 	get '/places/new' do 
 		protect_data
 		erb :'places/new'
