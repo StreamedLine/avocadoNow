@@ -54,6 +54,7 @@ class UsersController < ApplicationController
 		redirect '/places' unless logged_in?  
 
 		@user = current_user
+		@thumb_count = @user.thumbs.count 
 		erb :index
 	end
 end

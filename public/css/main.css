@@ -46,3 +46,25 @@ input[type='text'] {
 	font-size: 1em;
 	margin-bottom: 15px;
 }
+
+.bubble {
+	display: inline-block;
+	font-size: 1.1em;
+	background-color: green;
+	color: white;
+	border-radius: 50%;
+	width: 1.2em;
+	height: 1.2em;
+	text-align: center;
+}
+
+.paddit {
+	padding: 10px;
+}
+
+.even {
+	background-color: #eeffe6
+}
+.odd {
+	background-color: #ccf5ff
+}

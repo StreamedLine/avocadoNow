@@ -1,16 +1,15 @@
 <h1>Avocado Now!</h1>
-<h2>Profile</h2>
+<h2>Hi <%=@user.name%></h2>
 
-<h3>I've Confirmed <%=@user.thumbs.count%> places</h3>
+<h3>You've Confirmed <span class='bubble'><%=@thumb_count%></span> place<%=@thumb_count != 1 ? 's' : ''%></h3>
 
 <hr>
 <h3>Places I've Added</h3>
-<%@user.places.each do |place|%>
-	<hr>
-	<%=place.name%> <br>
-	<%=place.address%> <br>
-	<%=place.created_at.strftime("Avocados spotted at: %H:%M  %m/%d ")
-	%> <br>
-	<hr>
+<%@user.places.each_with_index do |place, i|%>
+	<div class="paddit <%=i.even? ? 'even' : 'odd'%>">
+		<a href="/places/<%=place.id%>"><%=place.name%></a> 
+		<br>
+		<%=place.created_at.strftime("Avocados spotted at: %H:%M  %m/%d ")%> 
+		<br>
+	</div>
 <%end%>
-<hr>
