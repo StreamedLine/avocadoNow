@@ -3,6 +3,6 @@ class Place < ActiveRecord::Base
 	has_many :thumbs
 
 	def self.getRecent(lmt = -1)
-		self.order('expired ASC').order('updated_at DESC')[0..lmt]
+		self.order('updated_at DESC').order('expired ASC')[0..lmt]
 	end
 end
