@@ -1,6 +1,7 @@
 class PlacesController < ApplicationController
 	get '/places' do 
 		@places = Place.getRecent
+		@expired = Place.getExpired
 		erb :'/places/index'
 	end
 
