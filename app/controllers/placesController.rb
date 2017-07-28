@@ -1,11 +1,15 @@
 class PlacesController < ApplicationController
 	get '/places' do 
+		@logged_out = true unless logged_in?
+
 		@places = Place.getRecent
 		@expired = Place.getExpired
 		erb :'/places/index'
 	end
 
 	get '/places/new' do 
+		@logged_out = true unless logged_in?
+
 		erb :'places/new'
 	end
 
@@ -17,6 +21,8 @@ class PlacesController < ApplicationController
 	end
 
 	get '/places/:id' do 
+		@logged_out = true unless logged_in?
+
 		@place = Place.find(params[:id])
 		@editable = is_current_user?(@place.user_id) ? true : nil 
 		erb :'places/show'

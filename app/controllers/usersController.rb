@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 	##########
 	#  SIGNUP
 	get '/users/signup' do 
+		@logged_out = true unless logged_in?
 		erb :'users/signup'
 	end
 
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
 	##########
 	#  LOGIN
 	get '/users/login' do 
+		@logged_out = true unless logged_in?
 		erb :'users/login'
 	end
 
