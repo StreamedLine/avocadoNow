@@ -1,5 +1,9 @@
 <h1>Avocado Details</h1>
 
+<%if @editable == true%>
+	<a href="/places/<%=@place.id%>/edit">Edit</a>
+<%end%>
+
 <h3>Created at:</h3>
 <h4><%=@place.updated_at%></h4>
 

@@ -38,7 +38,7 @@ class PlacesController < ApplicationController
 			redirect "places/#{place.id}"
 		else
 			flash[:error] = "You can only update your own post."
-			redirect "places/#{place.id}"
+			redirect "places/#{params[:id]}"
 		end
 	end
 
