@@ -8,12 +8,19 @@ class PlacesController < ApplicationController
 	end
 
 	get '/places/new' do 
+		if !logged_in? 
+			flash[:error] = "Please log in to submit location"
+			redirect '/users/login'
+		end
 		@logged_out = true unless logged_in?
-
 		erb :'places/new'
 	end
 
 	post '/places' do 
+		if !logged_in? 
+			flash[:error] = "Please log in to submit location"
+			redirect '/users/login'
+		end
 		current_user.places.create(params[:place])
 
 		flash[:message] = "Avocado now! Success!"
