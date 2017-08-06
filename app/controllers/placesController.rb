@@ -1,6 +1,6 @@
-class PlacesController < ApplicationController
+	class PlacesController < ApplicationController
 	get '/places' do 
-		@logged_out = true unless logged_in?
+		@logged_out = true if !logged_in?
 
 		@places = Place.getRecent
 		@expired = Place.getExpired
@@ -12,7 +12,7 @@ class PlacesController < ApplicationController
 			flash[:error] = "Please log in to submit location"
 			redirect '/users/login'
 		end
-		@logged_out = true unless logged_in?
+		@logged_out = true if !logged_in?
 		erb :'places/new'
 	end
 
@@ -28,7 +28,7 @@ class PlacesController < ApplicationController
 	end
 
 	get '/places/:id' do 
-		@logged_out = true unless logged_in?
+		@logged_out = true if !logged_in?
 
 		@place = Place.find(params[:id])
 		@editable = is_current_user?(@place.user_id) ? true : nil 
