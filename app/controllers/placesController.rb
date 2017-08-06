@@ -1,7 +1,5 @@
 	class PlacesController < ApplicationController
 	get '/places' do 
-		@logged_out = true if !logged_in?
-
 		@places = Place.getRecent
 		@expired = Place.getExpired
 		erb :'/places/index'
@@ -12,15 +10,11 @@
 			flash[:error] = "Please log in to submit location"
 			redirect '/users/login'
 		end
-		@logged_out = true if !logged_in?
 		erb :'places/new'
 	end
 
 	post '/places' do 
-		if !logged_in? 
-			flash[:error] = "Please log in to submit location"
-			redirect '/users/login'
-		end
+		protect_data("Please log in to submit location")
 		current_user.places.create(params[:place])
 
 		flash[:message] = "Avocado now! Success!"
@@ -28,25 +22,26 @@
 	end
 
 	get '/places/:id' do 
-		@logged_out = true if !logged_in?
-
 		@place = Place.find(params[:id])
-		@editable = is_current_user?(@place.user_id) ? true : nil 
+		@editable = is_owner?(@place.user) ? true : nil 
 		erb :'places/show'
 	end
 
 	get '/places/:id/edit' do
 		protect_data
-
 		@place = Place.find(params[:id])
-		erb :'places/edit'
+		if is_owner?(@place.user)
+			erb :'places/edit'
+		else
+			redirect to '/places'
+		end
 	end 
 
 	patch '/places/:id' do 
-		protect_data
-
-		if is_current_user?(Place.find(params[:id]).user_id)
-			place = Place.update(params[:id], params[:place])
+		protect_data("You must be logged to update this location")
+		place = Place.find(params[:id])
+		if is_owner?(place.user)
+			place.update(params[:place])
 			flash[:message] = "Update successful."
 			redirect "places/#{place.id}"
 		else
@@ -57,9 +52,9 @@
 
 	delete '/places:id' do 
 		protect_data
-
-		if is_current_user?(Place.find(params[:id]).user_id)
-			place = Place.find(params[:id]).destroy
+		place = Place.find(params[:id])
+		if is_owner?(place.user)
+			place.destroy
 			flash[:message] = "Delete successful."
 			redirect '/'
 		else

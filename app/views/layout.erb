@@ -10,16 +10,16 @@
 <nav>
 	<a href="/">Home</a>
 	<a href="/places">Avocado-Now</a>
-	<%if @logged_out == true%>
+	<% if !logged_in? %>
 		<a href="/users/login">login</a>
 		<a href="/users/signup">signup</a>
-	<%else%>
+	<% else %>
 		<a href="/users/logout">logout</a>
-	<%end%>
+	<% end %>
 </nav>
 
 <div class="flashMessages">
-	<%if flash.include?(:error) %>
+	<% if flash.include?(:error) %>
 	  <h3 class="flash error"><%= flash[:error] %></h3>
 	<% end %>
 	<% if flash.include?(:message) %>
@@ -27,7 +27,7 @@
 	<% end %>
 </div>
 
-<%=yield%>
+<%= yield %>
 
 </body>
 </html>

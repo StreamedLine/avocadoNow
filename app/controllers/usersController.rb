@@ -17,7 +17,11 @@ class UsersController < ApplicationController
 	        	redirect '/users/signup' #early return
 	    	end
 
-	        User.create(name: params[:name], password: params[:password]) 
+	        if User.create(name: params[:name], password: params[:password]) 
+	        	session[:user_id] = @user.id
+	   	   		flash[:message] = "successfully logged in"
+	   	   		redirect to "/"
+	   	   	end
 	    end
 		erb :'users/login'
 	end
